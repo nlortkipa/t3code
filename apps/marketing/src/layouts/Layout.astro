@@ -3,6 +3,7 @@ import { getImage, Image } from "astro:assets";
 import appIcon from "../assets/icon.webp";
 import socialCard from "../assets/social-card.webp";
 import "@fontsource-variable/inter";
+import "@fontsource-variable/noto-sans-georgian";
 import {
   ANDROID_PLAY_STORE_URL,
   GITHUB_REPOSITORY_URL,
@@ -251,6 +252,18 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
     --radius: 12px;
     --radius-sm: 8px;
     --radius-lg: 16px;
+    --display-tracking: -0.03em;
+    --display-leading: 1.05;
+  }
+
+  /* Inter has no Georgian, and OS fallbacks range from Sylfaen (serif) to nothing. Scoped to ka so
+     no other locale ever fetches this family's subsets. */
+  :root:lang(ka) {
+    --font-sans: -apple-system, BlinkMacSystemFont, "Inter Variable", "Noto Sans Georgian Variable", "Segoe UI", system-ui, sans-serif;
+    --font-mono: ui-monospace, "SF Mono", "SFMono-Regular", Menlo, Consolas, "Liberation Mono", monospace, "Noto Sans Georgian Variable";
+    /* Mkhedruli's tall ascenders and deep descenders collide at Inter's tight display settings. */
+    --display-tracking: 0;
+    --display-leading: 1.25;
   }
 
   * {
@@ -306,8 +319,8 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 
   .display {
     font-weight: 600;
-    letter-spacing: -0.03em;
-    line-height: 1.05;
+    letter-spacing: var(--display-tracking);
+    line-height: var(--display-leading);
   }
 
   .container {
@@ -677,6 +690,11 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
       width: 100%;
       gap: 14px 20px;
       justify-content: initial;
+    }
+
+    /* "კონფიდენციალურობა" alone is wider than a third of a phone. */
+    .footer-links:lang(ka) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 

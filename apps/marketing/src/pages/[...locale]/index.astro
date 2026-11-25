@@ -506,8 +506,8 @@ const mobileEndorsementRows = [
   .section-head h2 {
     font-size: clamp(32px, 4vw, 48px);
     font-weight: 600;
-    letter-spacing: -0.03em;
-    line-height: 1.05;
+    letter-spacing: var(--display-tracking);
+    line-height: var(--display-leading);
     margin-bottom: 18px;
   }
 
@@ -572,6 +572,8 @@ const mobileEndorsementRows = [
   .hero-title span { display: inline-block; }
   /* Japanese lines run to 13 full-width glyphs and would collide with the floating marks. */
   .hero-title:lang(ja) { font-size: clamp(30px, 4.5vw, 62px); }
+  /* Georgian's longest line is ~1.5x the English one; this keeps it to three lines. */
+  .hero-title:lang(ka) { font-size: clamp(28px, 4.4vw, 62px); max-width: none; }
 
   .hero-sub {
     color: var(--fg-muted);
@@ -730,6 +732,9 @@ const mobileEndorsementRows = [
     }
 
     .hero-title:lang(ja) { font-size: clamp(22px, 6.4vw, 44px); }
+    .hero-title:lang(ka) { font-size: clamp(20px, 6.6vw, 44px); }
+    /* The marks sit at a fixed offset and the Georgian links below the CTA are too wide to clear them. */
+    .hero:lang(ka) :is(.hf-grok, .hf-cursor) { display: none; }
 
     .hero-actions {
       margin-bottom: 40px;
@@ -838,8 +843,8 @@ const mobileEndorsementRows = [
   .endorsements-head h2 {
     font-size: clamp(32px, 4vw, 48px);
     font-weight: 600;
-    letter-spacing: -0.03em;
-    line-height: 1.05;
+    letter-spacing: var(--display-tracking);
+    line-height: var(--display-leading);
     margin-bottom: 18px;
   }
 
